@@ -1,0 +1,104 @@
+{
+	"pollers": [
+		{
+			"url": "tcp://plc:502",
+			"poll_interval_ms": 5000,
+			"targets": [
+				{
+					"register_type": "h:uint32",
+					"register_address": 0,
+					"label": "plc.system_time"
+				},
+				{
+					"register_type": "h:int16",
+					"register_address": 258,
+					"label": "living_room.sensor0.temperature_C",
+					"scale_factor": 0.1,
+					"decimal_places": 1
+				},
+				{
+					"register_type": "h:uint16",
+					"register_address": 259,
+					"label": "living_room.sensor0.relHumidity_pc",
+					"scale_factor": 0.1,
+					"decimal_places": 1
+				},
+				{
+					"register_type": "h:int16",
+					"register_address": 274,
+					"label": "living_room.sensor1.temperature_C",
+					"scale_factor": 0.1,
+					"decimal_places": 1
+				},
+				{
+					"register_type": "h:uint16",
+					"register_address": 275,
+					"label": "living_room.sensor1.relHumidity_pc",
+					"scale_factor": 0.1,
+					"offset": 10.5,
+					"decimal_places": 1
+				}
+			]
+		},
+		{
+			"url": "rtu:///dev/ttyUSB0",
+			"speed_bps": 19200,
+			"poll_interval_ms": 1000,
+			"targets": [
+				{
+					"unit_id": 5,
+					"register_type": "i:uint32",
+					"register_address": 50514,
+					"label": "main_power_meter.u12_V",
+					"scale_factor": 0.01,
+					"decimal_places": 3
+				},
+				{
+					"unit_id": 5,
+					"register_type": "i:uint32",
+					"register_address": 50516,
+					"label": "main_power_meter.u23_V",
+					"scale_factor": 0.01,
+					"decimal_places": 3
+				},
+				{
+					"unit_id": 5,
+					"register_type": "i:uint32",
+					"register_address": 50518,
+					"label": "main_power_meter.u31_V",
+					"scale_factor": 0.01,
+					"decimal_places": 3
+				},
+				{
+					"unit_id": 5,
+					"register_type": "h:float32",
+					"register_address": 30500,
+					"label": "main_power_meter.p_kW",
+					"scale_factor": 0,
+					"decimal_places": 3
+				}
+			]
+		}
+	],
+	"sinks": [
+		{
+			"type": "json",
+			"url": "/mnt/data_archive/json",
+			"max_age_ms": 30000
+		},
+		{
+			"type": "csv",
+			"url": "/mnt/data_archive/csv",
+			"max_age_ms": 30000
+		},
+		{
+			"type": "influxdb",
+			"url": "http://localhost:8086/write?db=house",
+			"max_age_ms": 5000,
+			"fifo_size": 200000
+		},
+		{
+			"type": "console"
+		}
+	]
+}

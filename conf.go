@@ -38,6 +38,7 @@ type sinkConf	struct {
 	FifoSize	uint		`json:"fifo_size"`
 	MaxAge_ms	uint		`json:"max_age_ms"`
 	Url		string		`json:"url"`
+	Table		string		`json:"table"`
 }
 
 type jsonConf struct {

@@ -98,6 +98,13 @@
 			"fifo_size": 200000
 		},
 		{
+			"type": "timescaledb",
+			"table": "metrics",
+			"url": "user=datalogger password=h4ck3r dbname=house",
+			"max_age_ms": 5000,
+			"fifo_size": 200000
+		},
+		{
 			"type": "console"
 		}
 	]

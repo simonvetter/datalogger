@@ -47,6 +47,10 @@ func main() {
 			sink, err = NewInfluxDBSink(sc.Url, sc.FifoSize, 0,
 					time.Duration(sc.MaxAge_ms) * time.Millisecond)
 
+		case "timescaledb":
+			sink, err = NewTimescaleDBSink(sc.Url, sc.Table, sc.FifoSize, 0,
+					time.Duration(sc.MaxAge_ms) * time.Millisecond)
+
 		case "console":
 			sink, err = NewConsoleSink(sc.FifoSize)
 
